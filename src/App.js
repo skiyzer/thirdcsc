@@ -57,7 +57,7 @@ function App() {
             </nav>
             <Routes>
               <Route path="/site" element={<SiteList Sites={Sites} />} />
-              <Route path="/site/:SiteID" element={<SiteDetails />} />
+              <Route path="/site/:SiteID" element={<SiteDetails Sites={Sites} />} />
             </Routes>
           </BrowserRouter>
           
