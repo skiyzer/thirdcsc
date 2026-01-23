@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import SiteList from "./sitelist.js";
 
 import './App.css';
+import "./siteTheme.css";
 import SiteDetails from './siteData.js';
 
 function App() {
@@ -45,26 +46,25 @@ function App() {
   
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Boyle Sites</h1>
-
-        {
-
-          <BrowserRouter>
-            <nav>
-              <Link to="/site">Sites</Link> |{" "}
-            </nav>
-            <Routes>
-              <Route path="/site" element={<SiteList Sites={Sites} />} />
-              <Route path="/site/:SiteID" element={<SiteDetails Sites={Sites} />} />
-            </Routes>
-          </BrowserRouter>
-          
-        }
-
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header className="app-banner">
+          <div className="app-title">
+            <h1>Boyle Sites</h1>
+            <p>Historic landmarks and landscapes around the county.</p>
+          </div>
+          <nav className="app-nav">
+            <Link to="/site">Sites</Link>
+          </nav>
+        </header>
+        <main className="app-main">
+          <Routes>
+            <Route path="/site" element={<SiteList Sites={Sites} />} />
+            <Route path="/site/:SiteID" element={<SiteDetails Sites={Sites} />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 

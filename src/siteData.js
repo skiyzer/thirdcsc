@@ -8,11 +8,23 @@ function SiteDetails(props) {
    const hasSites = sites.some(s => s && s.SiteID != null);
 
    if (!hasSites) {
-      return <p>Loading site details...</p>;
+      return (
+         <section className="page page--detail">
+            <div className="page-inner">
+               <p className="detail-status">Loading site details...</p>
+            </div>
+         </section>
+      );
    }
 
    if (!site) {
-      return <p>Site not found.</p>;
+      return (
+         <section className="page page--detail">
+            <div className="page-inner">
+               <p className="detail-status">Site not found.</p>
+            </div>
+         </section>
+      );
    }
 
    const imageSrc = site.Image
@@ -20,20 +32,29 @@ function SiteDetails(props) {
       : "";
 
    return (
-      <>
-         {imageSrc && (
-            <img
-               src={imageSrc}
-               alt={site.Site}
-               width={640}
-               height={426}
-            />
-         )}
-         <h2>{site.Site}</h2>
-         <p>{site.Description}</p>
-         <p>Latitude: {site.Latitude}</p>
-         <p>Longitude: {site.Longitude}</p>
-      </>
+      <section className="page page--detail">
+         <div className="page-inner">
+            <div className="detail-layout">
+               {imageSrc && (
+                  <img
+                     className="detail-image"
+                     src={imageSrc}
+                     alt={site.Site}
+                     width={640}
+                     height={426}
+                  />
+               )}
+               <div>
+                  <h2 className="page-title">{site.Site}</h2>
+                  <p className="detail-description">{site.Description}</p>
+                  <div className="detail-meta">
+                     <span>Latitude: {site.Latitude}</span>
+                     <span>Longitude: {site.Longitude}</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
    );
 }
 export default SiteDetails;

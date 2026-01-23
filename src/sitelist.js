@@ -7,19 +7,21 @@ function SiteList(props) {
     const sites = Array.isArray(props.Sites) ? props.Sites : [];
 
    return (
-    
-      <ol>
-            {sites
-               .filter(site => site && site.SiteID != null && site.Site)
-               .map(site => {
-                  const imageSrc = site.Image
-                     ? `${process.env.PUBLIC_URL}/${site.Image}`
-                     : "";
+      <section className="page page--list">
+         <div className="page-inner">
+            <h2 className="page-title">Site Directory</h2>
+            <ol className="site-grid">
+               {sites
+                  .filter(site => site && site.SiteID != null && site.Site)
+                  .map(site => {
+                     const imageSrc = site.Image
+                        ? `${process.env.PUBLIC_URL}/${site.Image}`
+                        : "";
 
-                  return (
-                     <li key={site.SiteID}>
+                     return (
+                        <li key={site.SiteID} className="site-card">
                            {imageSrc && (
-                              <div>
+                              <div className="site-image">
                                  <img
                                     src={imageSrc}
                                     alt={site.Site}
@@ -29,14 +31,16 @@ function SiteList(props) {
                               </div>
                            )}
                            <div>
-                              <Link to={`/site/${site.SiteID}`}>
+                              <Link className="site-link" to={`/site/${site.SiteID}`}>
                                  {site.Site}
                               </Link>
                            </div>
-                     </li>
-                  );
-               })}
-      </ol>
+                        </li>
+                     );
+                  })}
+            </ol>
+         </div>
+      </section>
    );
 }
 
