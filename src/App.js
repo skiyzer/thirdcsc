@@ -1,49 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import SiteList from "./sitelist.js";
-
-import './App.css';
+import SiteList from "./sitelist";
+import "./App.css";
 import "./siteTheme.css";
-import SiteDetails from './siteData.js';
+import SiteDetails from "./siteData";
+import VisitTimer from "./VisitTimer";
 
 function App() {
-  
-  const [Sites, setSites] = useState([{}]);
-  useEffect(() => {      
-      async function fetchSites() 
-      {
-         const url = "/BoyleSites.json";
-         const response = await fetch(url);
-         if (response.ok) {
-            const result = await response.json();
-            console.log(result);
-            setSites(result);
-            }
-        }
-      fetchSites();
-   },[]);
+  const [sites, setSites] = useState([]);
 
   useEffect(() => {
-    async function loadData() 
-    {
+    async function loadSites() {
       try {
         const response = await fetch(`${process.env.PUBLIC_URL}/BoyleSites.json`);
-        if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
-        }
         const data = await response.json();
-        if (!Array.isArray(data)) {
-          throw new Error('Expected a JSON array of records.');
+        if (Array.isArray(data)) {
+          setSites(data);
+        } else {
+          setSites([]);
         }
-        console.log('BoyleSites.json contents:', data);
-      } catch (error) {
-        console.error('Failed to load BoyleSites.json:', error);
+      } catch {
+        setSites([]);
       }
     }
-      
-    loadData();
+
+    loadSites();
   }, []);
-  
 
   return (
     <BrowserRouter>
@@ -56,11 +38,12 @@ function App() {
           <nav className="app-nav">
             <Link to="/site">Sites</Link>
           </nav>
+          <VisitTimer />
         </header>
         <main className="app-main">
           <Routes>
-            <Route path="/site" element={<SiteList Sites={Sites} />} />
-            <Route path="/site/:SiteID" element={<SiteDetails Sites={Sites} />} />
+            <Route path="/site" element={<SiteList sites={sites} />} />
+            <Route path="/site/:SiteID" element={<SiteDetails sites={sites} />} />
           </Routes>
         </main>
       </div>

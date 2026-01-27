@@ -1,0 +1,35 @@
+﻿Project Details
+
+Major Parts
+- Header banner with title, short description, navigation link, and visit timer.
+- Site Directory page showing a grid of site cards with optional images.
+- Site Details page showing a large image, description, and coordinates.
+- Shared layout keeps page width, spacing, and typography consistent.
+
+Noticeable CSS
+- Typography pairing uses a display serif for headings and a clean sans for body text.
+- Bold header band establishes hierarchy with roomy padding and clear alignment.
+- Grid layout creates uniform cards and keeps images the same size for balance.
+- Detail page layout places the image and text side‑by‑side for easy reading.
+- Soft shadows, rounded corners, and consistent gaps create a modern look.
+- Accent colors are reused for links and highlights to improve visual rhythm.
+
+Value Adds
+- Visit timer for a 3‑hour challenge adds a react-interactive goal.
+- “Sites visited” counter tracks progress while exploring details.
+- Loading and “not found” states prevent confusing blank screens.
+- Image fallbacks avoid broken layout when a site has no photo.
+- Routes are short and readable.
+
+Functionality
+
+- Uses localStorage to persist the timer start time across refreshes.
+- Stores visited site IDs so progress remains after navigation.
+- Updates the timer every second for a live countdown.
+
+User Quality of Life
+- Clear navigation and simple URL structure (/site, /site/:id).
+- Large, legible headings and comfortable line spacing for quick scanning.
+- Consistent spacing helps users know where to look next.
+- Mobile‑friendly stacking keeps content readable on small screens.
+- Minimal clicks to reach a site detail page.
